@@ -1,0 +1,57 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Daftar Transaksi
+		.alert.alert-info.alert-dismissable
+			a.close(href='#', data-dismiss='alert', aria-label='close') ×
+			strong Info!
+			br
+			| Cetak Bon/Cetak Bukti dapat dilakukan setelah 
+			u
+				b status transaksi Anda Aktif.
+		.btn-group
+			button.btn.btn-default(type='button') Tampilkan Data Berdasarkan 
+			button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+				span.caret
+				span.sr-only Toggle Dropdown
+			ul.dropdown-menu
+				li
+					a(href='?urutkan=tgl_pesan_asc') Tanggal Pesan
+				li
+					a(href='?urutkan=status_transaksi_aktif') Status Transaksi (Aktif)
+				li
+					a(href='?urutkan=status_transaksi_nonaktif') Status Transaksi (Belum Aktif)
+				li
+					a(href='?urutkan=status_transaksi_batal') Status Transaksi (Batal)
+				li
+					a(href='?urutkan=status_bayar_belum_bayar') Status Pembayaran (Belum Dibayar)
+				li
+					a(href='?urutkan=status_bayar_diproses') Status Pembayaran (Diproses)
+				li
+					a(href='?urutkan=status_bayar_diterima') Status Pembayaran (Diterima)
+				li
+					a(href='?urutkan=status_bayar_ditolak') Status Pembayaran (Ditolak)
+		each trx in daftar_transaksi
+			.panel
+				.panel-body
+					.form-group
+						label.control-label.col-sm-3(for='Tnm_pengirim') Kode Transaksi  
+						.col-sm-3
+							p#Tnm_pengirim.form-control-static #{trx.id_transaksi}
+						label.control-label.col-sm-3(for='Tnm_pengirim') Total Biaya  
+						.col-sm-3
+							p#Tnm_pengirim.form-control-static Rp.#{trx.hrg_total}
+						label.control-label.col-sm-3(for='Tnm_pengirim') Status Pembayaran  
+						.col-sm-3
+							p#Tnm_pengirim.form-control-static #{trx.nm_status_pembayaran}
+						label.control-label.col-sm-3(for='Tnm_pengirim') Tanggal Pesan  
+						.col-sm-3
+							p#Tnm_pengirim.form-control-static #{trx.tgl_pesan}
+						label.control-label.col-sm-3(for='Tnm_pengirim') Status Transaksi  
+						.col-sm-3
+							p#Tnm_pengirim.form-control-static #{trx.nm_status_transaksi}
+						.col-sm-6 AKSI
+		

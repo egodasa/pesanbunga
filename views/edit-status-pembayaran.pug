@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			each data in data_status_pembayaran
+				.form-group
+					label.label-control(for='Tnm_status_pembayaran') Nama Status pembayaran 
+					input#Tnm_status_pembayaran.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_status_pembayaran', value=data.nm_status_pembayaran) 
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

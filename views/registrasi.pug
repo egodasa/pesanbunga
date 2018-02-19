@@ -1,0 +1,60 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Registrasi Pengguna baru
+		form(method='post', accept-charset='utf-8')
+			- if(error)
+				div(class=error.Tusername.msg == 'betul' ? 'form-group' : 'form-group has-error')
+					label.label-control(for='Tusername') Username
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername', value=error.Tusername.value)
+					span.help-block.has-error #{error.Tusername.msg == 'betul' ? '' : error.Tusername.msg}
+				div(class=error.Tpassword1.msg == 'betul' ? 'form-group' : 'form-group has-error')
+					label.label-control(for='Tpassword1') Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword1')
+					span.help-block.has-error #{error.Tpassword1.msg == 'betul' ? '' : error.Tpassword1.msg}
+				.form-group
+					label.label-control(for='Tpassword2') Ulangi Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword2') 
+				div(class=error.Tnama.msg == 'betul' ? 'form-group' : 'form-group has-error')
+					label.label-control(for='Tnama') Nama Lengkap Anda
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='text', name='Tnama', value=error.Tnama.value)
+					span.help-block.has-error #{error.Tnama.msg == 'betul' ? '' : error.Tnama.msg}
+				div(class=error.Tnohp.msg == 'betul' ? 'form-group' : 'form-group has-error')
+					label.label-control(for='Tnohp') Nomor Handphone
+					input#Tpassword.form-control(type='number', name='Tnohp', value=error.Tnohp.value) 
+					span.help-block.has-error #{error.Tnohp.msg == 'betul' ? '' : error.Tnohp.msg}
+				div(class=error.Temail.msg == 'betul' ? 'form-group' : 'form-group has-error')
+					label.label-control(for='Temail') Email [Tidak Wajib]
+					input#Tpassword.form-control(type='email', name='Temail', value=error.Temail.value)
+					span.help-block.has-error #{error.Temail.msg == 'betul' ? '' : error.Temail.msg}
+			- else
+				div(class='form-group')
+					label.label-control(for='Tusername') Username
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername')
+					
+				div(class='form-group')
+					label.label-control(for='Tpassword1') Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword1')
+					 
+				.form-group
+					label.label-control(for='Tpassword2') Ulangi Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword2') 
+				div(class='form-group')
+					label.label-control(for='Tnama') Nama Lengkap Anda
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='text', name='Tnama')
+					  
+				div(class='form-group')
+					label.label-control(for='Tnohp') Nomor Handphone
+					input#Tpassword.form-control(type='number', name='Tnohp') 
+					
+				div(class='form-group')
+					label.label-control(for='Temail') Email [Tidak Wajib]
+					input#Tpassword.form-control(type='email', name='Temail')
+					span.help-block.has-error
+			button.btn.btn-primary(type='submit')
+				|  Register
+			button.btn.btn-danger(type='reset')
+				|  Reset

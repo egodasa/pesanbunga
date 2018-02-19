@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			each data in data_status_transaksi
+				.form-group
+					label.label-control(for='Tnm_status_transaksi') Nama Status transaksi 
+					input#Tnm_status_transaksi.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_status_transaksi', value=data.nm_status_transaksi) 
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

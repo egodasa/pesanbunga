@@ -1,0 +1,56 @@
+nav.navbar.navbar-inverse
+	div.container-fluid
+		div.navbar-header
+			button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar                      
+			img.navbar-brand(src='/gambar/shallum.png')
+		div.collapse.navbar-collapse#myNavbar
+			ul.nav.navbar-nav.navbar-right
+				- if(tipe == 1)
+					li
+						a(href='/profil') Hai, #{username}
+					li.dropdown
+						a.dropdown-toggle(data-toggle='dropdown', href='#Kelola Data') Kelola Data
+							span.caret
+						ul.dropdown-menu
+							li
+								a(href='/kelola/pengguna') Data Pengguna
+									span.badge#pengguna_baru
+							li
+								a(href='/kelola/jenis-pengguna') Data Jenis Pengguna
+							li
+								a(href='/kelola/kota') Data Kota
+							li
+								a(href='/kelola/acara') Data Jenis Acara
+							li
+								a(href='/kelola/produk') Data Produk
+							li
+								a(href='/kelola/tipe-produk') Data Tipe Produk
+							li
+								a(href='/kelola/status-produk') Data Status Produk
+					li.dropdown
+						a.dropdown-toggle(data-toggle='dropdown', href='#Kelola Transaksi') Kelola Data Transaksi
+							span.caret
+						ul.dropdown-menu
+							li
+								a(href='/kelola/transaksi') Data Transaksi
+							li
+								a(href='/kelola/status-transaksi') Data Status Transaksi
+							li
+								a(href='/kelola/status-pembayaran') Data Status Pembayaran
+					li
+						a(href='/logout') Logout
+				- else if(tipe == 4)
+					li
+						a(href='/profil') Hai, #{username}
+					li
+						a(href='/kelola/transaksi') Daftar Transaksi
+					li
+						a(href='/logout') Logout
+				-else
+					li
+						a(href='/login') Login
+					li
+						a(href='/registrasi') Registrasi

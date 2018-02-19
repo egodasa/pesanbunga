@@ -1,0 +1,71 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Data Jenis Pengguna
+		a.btn.btn-success(href='#tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah Jenis Pengguna
+		table.table.table-striped.table-bordered
+			tr
+				th No
+				th Nama Kota
+				th Tarif
+				th(colspan='2') Aksi
+			- var no=1
+			each lap in daftar_kota //INI DAFTAR KOTA YANG AKAN DI LOOPING
+				tr
+					td #{no}
+					td #{lap.nm_kota}
+					td #{lap.hrg_kota}
+					td
+						a.btn.btn-success(href='/kelola/kota/edit?id_kota='+lap.id_kota)
+							span.glyphicon.glyphicon-edit
+							|  Edit
+						button.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_kota)
+							span.glyphicon.glyphicon-remove
+							|  Hapus
+						.modal.fade(id='konfirmasi'+lap.id_kota, role='dialog')
+							.modal-dialog
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal') ×
+										h4.modal-title Peringatan!
+									.modal-body
+										p
+											| Apakah Anda yakin ingin menghapus jenis pengguna kota
+											b #{lap.nm_kota}
+											|  dari sistem?
+									.modal-footer.float-right
+										a.btn.btn-danger(href='kota/hapus?id_kota='+lap.id_kota)     Ya    
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+				- no++
+		br
+		fieldset#tambah
+			legend
+				h2 Tambah Data Baru
+			form(method='post', accept-charset='utf-8')
+				- if(!Enm_kota)
+					.form-group
+						label.label-control(for='Tnm_kota') Nama Kota
+						input#Tnm_kota.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_kota', value='') 
+				- else
+					.form-group.has-error
+						label.label-control(for='Tnm_kota') Nama Kota
+						input#Tnm_kota.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_kota', value='')
+						span.help-block.has-error #{Enm_kota.msg}
+				
+				- if(!Etarif)
+					.form-group
+						label.label-control(for='Thrg_kota') Tarif 
+						input#Thrg_kota.form-control(placeholder='Contoh : 45000', type='text', name='Thrg_kota', value='') 
+				- else
+					.form-group.has-error
+						label.label-control(for='Thrg_kota') Tarif 
+						input#Thrg_kota.form-control(placeholder='Contoh : 45000', type='text', name='Thrg_kota', value='')
+						span.help-block.has-error #{Etarif.msg}
+				button.btn.btn-success(type='submit')
+					span.glyphicon.glyphicon-plus-sign
+					|  Simpan

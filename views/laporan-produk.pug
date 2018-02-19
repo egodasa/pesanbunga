@@ -1,0 +1,68 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Data Produk
+		a.btn.btn-success(href='#tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah Produk
+		table.table.table-striped.table-bordered
+			tr
+				td No
+				td Kode Produk
+				td Tipe
+				td Foto
+				td Status
+				td(colspan='3') Aksi
+			- var no=1
+			each lap in daftar_produk	
+				tr
+					td #{no}
+					td #{lap.id_produk}
+					td #{lap.nm_tipe}
+					td
+						img(src='/gambar/produk/'+lap.gambar, width='200', height='150')
+					td #{lap.nm_status_produk}
+					td
+						a.btn.btn-success(href='/kelola/produk/edit?id_produk='+lap.id_produk)
+							span.glyphicon.glyphicon-edit
+							|  Edit
+						button.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_produk)
+							span.glyphicon.glyphicon-remove
+							|  Hapus
+						.modal.fade(id='konfirmasi'+lap.id_produk, role='dialog')
+							.modal-dialog
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal') ×
+										h4.modal-title Peringatan!
+									.modal-body
+										p Apakah Anda yakin ingin menghapus produk ini dari sistem?
+									.modal-footer.float-right
+										a.btn.btn-danger(href='/kelola/produk/hapus?id_produk='+lap.id_produk)     Ya    
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+						a.btn.btn-info(href='/kelola/produk/detail?id_produk='+lap.id_produk)
+							span.glyphicon.glyphicon-menu-hamburger
+							|  Lihat Detail
+				- no++
+	fieldset
+		legend
+			h2 Tambah Produk baru
+		form(method='post', encType="multipart/form-data")
+			.form-group
+				label.label-control(for='Ctipe') Tipe/Ukuran Produk 
+				select.form-control(name='Ctipe')
+					option(value='0') -- Tipe Produk --
+					each lap in tipe_produk
+						option(value= lap.id_tipe) #{lap.nm_tipe} #{lap.ukuran}
+			.form-group
+				label.label-control(for='Tfoto') Foto/Gambar Produk 
+				input#Tfoto.form-control(type='file', name='Tfoto')
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Tambah Produk
+			button.btn.btn-danger(type='reset')
+				|  Reset
+	

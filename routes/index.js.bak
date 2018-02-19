@@ -1,0 +1,121 @@
+var express = require('express');
+var router = express.Router();
+var koneksi = require('../mysql_mod');
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  console.log(sesi.username);
+  sql='select * from tbproduk,tbtipe_produk where tbproduk.id_tipe=tbtipe_produk.id_tipe and tbproduk.id_status_produk=1 order by tbproduk.id_produk asc;';
+  koneksi.query(sql, function(e, rows, f) {
+    if (!e) {
+      res.render('index', {
+      daftar_produk : rows,
+      title: 'Beranda',
+      username : sesi.username
+      });
+    }
+  });
+});
+router.get('/login', function(req, res){
+	if(!sesi.username){
+		res.render('login.pug', {
+			title : 'Login'
+			})
+		}
+		else res.redirect('/');
+})
+.post('/login', function(req, res){
+	var username = req.body.Tusername;
+	var pass = req.body.Tpassword;
+	sql='SELECT username, password,id_jenis FROM tbpengguna WHERE username='+mysql.escape(username)+' AND password=md5('+mysql.escape(pass)+');';
+	koneksi.query(sql, function(e, rows, f){
+		if(rows.length == 1){
+			sesi.username = req.body.Tusername;
+			sesi.tipe = rows[0].id_jenis;
+			req.flash('success','Anda berhasil login :)');
+			console.log(sesi.username+' '+sesi.tipe);
+			res.redirect('/');
+		}
+		else {
+			req.flash('danger','Username atau Password salah.')
+			res.redirect('/login');
+		}
+		});
+});
+router.get('/registrasi', function(req, res){
+	var pesan = {};
+	res.render('registrasi.pug', {
+		title : 'Registrasi',
+		validate : false
+		});
+	console.log('sesudah get '+req.body.Tusername);
+});
+router.post('/registrasi', function(req, res, next){
+	var username = req.body.Tusername;
+	var pass = req.body.Tpassword1;
+	var nama = req.body.Tnama;
+	var email = req.body.Temail;
+	var nohp = req.body.Tnohp;
+	req.checkBody(validasi);
+	req.getValidationResult().then(function(result){
+		result.useFirstErrorOnly();
+		if(result){
+		var pesan = result.mapped();
+		if(!pesan.Tusername){
+			pesan.Tusername.value = username;
+			pesan.Tusername.msg = ' ';
+			pesan.Tusername.err = ' ';
+			console.log('pasca if '+pesan.Tusername);
+		}else console.log('else if '+pesan.Tusername.value);
+		if(!pesan.Tnama){
+			pesan.Tnama.value = nama;
+			pesan.Tnama.msg = ' ';
+			pesan.Tnama.err = ' ';
+		}
+		if(!pesan.Temail){
+			pesan.Temail.value = email;
+			pesan.Temail.msg = ' ';
+			pesan.Temail.err = ' ';
+		}
+		if(!pesan.Tnohp){
+			pesan.Tnohp.value = nohp;
+			pesan.Tnohp.msg = ' ';
+			pesan.Tnohp.err = ' ';
+		}
+		console.log(pesan);
+			res.render('registrasi.pug', {
+			title : 'Registrasi',
+			validate : true,
+			Eusername : pesan.Tusername,
+			Epass : pesan.Tpassword1,
+			Enama : pesan.Tnama,
+			Eemail : pesan.Temail,
+			Enohp : pesan.Tnohp
+			});
+		}
+		else{
+		sql = 'INSERT INTO tbpengguna (username,password,nm_pengguna,nohp,email) values ('+mysql.escape(username)+',md5('+mysql.escape(pass)+'),'+mysql.escape(nama)+','+mysql.escape(nohp)+','+mysql.escape(email)+');';
+		koneksi.query(sql, function(e, rows, f){
+			if(!e) res.redirect('/login');
+			else console.log(e);
+			})
+		}
+		});
+});
+router.get('/logout', function(req, res, next) {
+  sesi.destroy(function(err){
+	  if(err) res.send(err);
+	  else res.redirect('/');
+	  });
+});
+router.get('/contoh', function(req, res, next) {
+  var anu;
+  console.log(anu);
+  console.log(pantek);
+  res.render('contoh', { title: req.params.angka });
+});
+router.post('/contoh', function(req, res, next) {
+  console.log(req.body.list.length);
+  res.redirect('/contoh');
+});
+
+module.exports = router;

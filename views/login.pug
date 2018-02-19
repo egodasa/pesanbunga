@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+	br
+	- if(flash)
+		for pesan in flash
+			+pesan(pesan.type, 'Perhatian!', pesan.message)
+	fieldset
+		legend
+			h2 Login Ke Shallum Florist
+		form(method='post', accept-charset='utf-8')
+			.form-group
+				label.label-control(for='Tusername') Username 
+				input#Tusername.form-control(type='text', name='Tusername') 
+			.form-group
+				label.label-control(for='Tpassword') Password
+				input#Tpassword.form-control(type='password', name='Tpassword') 
+			button.btn.btn-primary(type='submit')
+				|  Login
+			button.btn.btn-danger(type='reset')
+				|  Reset

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	- if(flash)
+		for pesan in flash
+			+pesan(pesan.type, 'Perhatian!', pesan.message)
+	div.well.well-sm
+		form.form-inline#pesan-acak
+			div.form-group
+				label.label-control(for='Tjumlah') Butuh berapa banyak karangan bunga? 
+				input.form-control#Tjumlah(type='numeric', name='Tjumlah', value='')  
+				button.btn.btn-success#Tpesan(type='submit')  Pesan
+	div.well.well-sm
+		div.container
+			div.row
+				each lap in daftar_produk
+					div.item.col-xs-12.col-lg-4
+						div.thumbnail
+							img.group.list-group-image.responsive(src='/gambar/produk/'+lap.gambar, alt='bunga', width='400', height='250')
+							div.caption
+								h4.group.inner.list-group-item-heading Tipe : #{lap.nm_tipe}
+								h4.group.inner.list-group-item-heading Ukuran : #{lap.ukuran}
+								div.row
+									div.col-xs-12.col-md-6
+										p.lead Rp.#{lap.hrg_tipe}
+	

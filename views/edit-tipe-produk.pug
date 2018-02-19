@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Edit Data Tipe Produk
+		form(method='post', accept-charset='utf-8')
+			each data in data_tipe_produk
+				.form-group
+					label.label-control(for='Tnm_tipe_produk') Nama Tipe 
+					input#Tnm_tipe_produk.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_tipe_produk', value=data.nm_tipe)
+				.form-group
+					label.label-control(for='Thrg_tipe') Harga
+					input#Thrg_tipe.form-control(placeholder='Contoh : 3000', type='text', name='Thrg_tipe', value=data.hrg_tipe)
+				.form-group
+					label.label-control(for='Tukuran') Ukuran
+					input#Tukuran.form-control(placeholder='Contoh : 2m X 3m', type='text', name='Tukuran', value=data.ukuran)
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

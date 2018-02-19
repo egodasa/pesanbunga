@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			each data in data_acara
+				.form-group
+					label.label-control(for='Tnm_acara') Nama Acara
+					input#Tnm_acara.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_acara', value=data.nm_acara) 
+				button.btn.btn-success(type='submit')
+					span.glyphicon.glyphicon-plus-sign
+					|  Simpan

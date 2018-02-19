@@ -1,0 +1,54 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Data Status transaksi
+		a.btn.btn-success(href='#tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah status transaksi
+		table.table.table-striped.table-bordered
+			tr
+				th No
+				th Nama status transaksi
+				th(colspan='2') Aksi
+			- var no=1
+			each lap in daftar_status_transaksi
+				tr
+					td #{no}
+					td #{lap.nm_status_transaksi}
+					td
+						a.btn.btn-success(href='/kelola/status-transaksi/edit?id_status_transaksi='+lap.id_status_transaksi)
+							span.glyphicon.glyphicon-edit
+							|  Edit
+						button.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_status_transaksi)
+							span.glyphicon.glyphicon-remove
+							|  Hapus
+						.modal.fade(id='konfirmasi'+lap.id_status_transaksi, role='dialog')
+							.modal-dialog
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal') ×
+										h4.modal-title Peringatan!
+									.modal-body
+										p
+											| Apakah Anda yakin ingin menghapus status transaksi 
+											b #{lap.nm_status_transaksi}
+											|  dari sistem?
+									.modal-footer.float-right
+										a.btn.btn-danger(href='/kelola/status-transaksi/hapus?id_status_transaksi='+lap.id_status_transaksi)     Ya    
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+				- no++
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			.form-group
+				label.label-control(for='Tnm_status_transaksi') Nama Status transaksi 
+				input#Tnm_status_transaksi.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_status_transaksi', value='') 
+				button.btn.btn-success(type='submit')
+					span.glyphicon.glyphicon-plus-sign
+					|  Simpan
+	

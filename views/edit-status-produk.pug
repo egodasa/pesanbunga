@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			each data in data_status_produk
+				.form-group
+					label.label-control(for='Tnm_status_produk') Nama Status Produk 
+					input#Tnm_status_produk.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_status_produk', value=data.nm_status_produk) 
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

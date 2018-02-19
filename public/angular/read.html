@@ -1,0 +1,14 @@
+<button type="button" ng-click="readData()">Refresh</button>
+<table>
+	<tr>
+		<th>No</th>
+		<th>Username</th>
+		<th>Nama Pengguna</th>
+	</tr>
+	<tr ng-repeat="x in data_tabel">
+		<td>{{$index+1}}</td>
+		<td>{{x.username}}</td>
+		<td>{{x.nm_pengguna}}</td>
+		<td><button type="button" ng-click="deleteData(x.id_pengguna)">Hapus</button></td>
+	</tr>
+</table>

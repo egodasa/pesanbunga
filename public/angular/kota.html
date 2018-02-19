@@ -1,0 +1,12 @@
+<table>
+			<tr>
+				<th>No</th>
+				<th>Kota</th>
+				<th>Tarif</th>
+			</tr>
+			<tr ng-repeat="x in data_kota">
+				<td>{{$index+1}}</td>
+				<td>{{x.nm_kota}}</td>
+				<td>{{x.hrg_kota | currency}}</td>
+			</tr>
+		</table>

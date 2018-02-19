@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+	head
+		title= title
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='icon', type='image/png', href='/gambar/favicon.png', sizes='32x32')
+		link(rel='stylesheet', media='all', href='/bootstrap/css/bootstrap.css')
+		link(rel='stylesheet', media='all', href='/bootstrap/css/tambahan.css')
+		script(src='/bootstrap/js/jquery-3.1.1.js')
+		script(src='/bootstrap/js/bootstrap.min.js')
+		script(src='/socket.io/socket.io.js')
+		script(src='/soket.js')
+	body
+		include menu.pug
+		include pesan.pug
+		div.container-fluid
+			block content
+		div.container-fluid
+			div.row
+				footer.col-sm-12.col-xs-12.text-center
+					p Created By 
+						a(href='https://www.facebook.com/Egodasa') Mandan
+	

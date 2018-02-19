@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+	br
+	fieldset#tambah
+		legend
+			h2 Edit Data Kota
+		form(method='post', accept-charset='utf-8')
+			each data in data_kota
+				.form-group
+					label.label-control(for='Tnm_kota') Nama Kota
+					input#Tnm_kota.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_kota', value=data.nm_kota) 
+				.form-group
+					label.label-control(for='Thrg_kota') Tarif 
+					input#Thrg_kota.form-control(placeholder='Contoh : 45000', type='text', name='Thrg_kota', value=data.hrg_kota) 
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

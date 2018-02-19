@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Edit Produk
+		form(method='post', encType="multipart/form-data")
+			each data in data_produk
+				.form-group
+					label.label-control(for='Ctipe') Tipe/Ukuran Produk 
+					select.form-control(name='Ctipe')
+						option(value='0') -- Tipe Produk --
+						each lap in tipe_produk
+							- if(lap.id_tipe == data.id_tipe)
+								option(value= lap.id_tipe selected) #{lap.nm_tipe}
+							- else
+								option(value= lap.id_tipe) #{lap.nm_tipe}
+			.form-group
+				label.label-control
+					| Ganti Foto Produk 
+				input(type='checkbox', name='ganti_foto' id='ganti_foto')
+				input#Tfoto.form-control(type='file', name='Tfoto' disabled)
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan
+			button.btn.btn-danger(type='reset')
+				|  Reset
+	script(src='/edit-produk.js')

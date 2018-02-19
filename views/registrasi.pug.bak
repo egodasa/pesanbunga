@@ -1,0 +1,60 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Registrasi Pengguna baru
+		form(method='post', accept-charset='utf-8')
+			- if (validate == true)
+				div(class='form-group'+Eusername.err)
+					label.label-control(for='Tusername') Username
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername', value=Eusername.value)
+					span.help-block.has-error #{Eusername.msg}
+				div(class='form-group'+Epass.err)
+					label.label-control(for='Tpassword1') Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword1')
+					span.help-block.has-error #{Epass.msg} 
+				.form-group
+					label.label-control(for='Tpassword2') Ulangi Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword2') 
+				div(class='form-group'+Enama.err)
+					label.label-control(for='Tnama') Nama Lengkap Anda
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='text', name='Tnama', value=Enama.value)
+					span.help-block.has-error #{Enama.msg}  
+				div(class='form-group'+Enohp.err)
+					label.label-control(for='Tnohp') Nomor Handphone
+					input#Tpassword.form-control(type='number', name='Tnohp', value=Enohp.value) 
+					span.help-block.has-error #{Enohp.msg}
+				div(class='form-group'+Eemail.err)
+					label.label-control(for='Temail') Email [Tidak Wajib]
+					input#Tpassword.form-control(type='email', name='Temail', value=Eemail.value)
+					span.help-block.has-error #{Eemail.msg}
+			- else
+				div(class='form-group')
+					label.label-control(for='Tusername') Username
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername')
+					 
+				div(class='form-group')
+					label.label-control(for='Tpassword1') Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword1')
+					  
+				.form-group
+					label.label-control(for='Tpassword2') Ulangi Password
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword2') 
+				div(class='form-group')
+					label.label-control(for='Tnama') Nama Lengkap Anda
+					input#Tpassword.form-control(placeholder='Min. 3 karakter', type='text', name='Tnama')
+					   
+				div(class='form-group')
+					label.label-control(for='Tnohp') Nomor Handphone
+					input#Tpassword.form-control(type='number', name='Tnohp') 
+					 
+				div(class='form-group')
+					label.label-control(for='Temail') Email [Tidak Wajib]
+					input#Tpassword.form-control(type='email', name='Temail')
+					 	
+			button.btn.btn-primary(type='submit')
+				|  Register
+			button.btn.btn-danger(type='reset')
+				|  Reset

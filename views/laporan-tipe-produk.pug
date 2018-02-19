@@ -1,0 +1,61 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Data Tipe Produk
+		a.btn.btn-success(href='#tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah Tipe Produk
+		table.table.table-striped.table-bordered
+			tr
+				th No
+				th Nama Tipe
+				th Tarif
+				th(colspan='2') Aksi
+			- var no=1
+			each lap in daftar_tipe_produk
+				tr
+					td #{no}
+					td #{lap.nm_tipe}
+					td #{lap.hrg_tipe}
+					td
+						a.btn.btn-success(href='/kelola/tipe-produk/edit?id_tipe='+lap.id_tipe)
+							span.glyphicon.glyphicon-edit
+							|  Edit
+						button.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_tipe)
+							span.glyphicon.glyphicon-remove
+							|  Hapus
+						.modal.fade(id='konfirmasi'+lap.id_tipe, role='dialog')
+							.modal-dialog
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal') ×
+										h4.modal-title Peringatan!
+									.modal-body
+										p
+											| Apakah Anda yakin ingin menghapus tipe produk 
+											b #{lap.nm_tipe}
+											|  dari sistem?
+									.modal-footer.float-right
+										a.btn.btn-danger(href='/kelola/tipe-produk/hapus?id_tipe='+lap.id_tipe)     Ya    
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+				- no++
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			.form-group
+				label.label-control(for='Tnm_tipe_produk') Nama Tipe 
+				input#Tnm_tipe_produk.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_tipe_produk', value='')
+			.form-group
+				label.label-control(for='Thrg_tipe') Harga
+				input#Thrg_tipe.form-control(placeholder='Contoh : 3000', type='text', name='Thrg_tipe', value='')
+			.form-group
+				label.label-control(for='Tukuran') Ukuran
+				input#Tukuran.form-control(placeholder='Contoh : 2m X 3m', type='text', name='Tukuran', value='')
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan

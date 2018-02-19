@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+	h2 Edit Data Pengguna
+	section
+		form(method='post', accept-charset='utf-8')
+			each lap_pengguna in data_pengguna
+				.form-group
+					label.label-control(for='Tnm_pengguna') Nama Pengguna 
+					input#Tnm_pengguna.form-control(placeholder='', type='text', name='Tnm_pengguna', value=lap_pengguna.nm_pengguna)
+				.form-group
+					label.label-control(for='Cjenis') Jenis 
+					select.form-control(name='Cjenis')
+						option(value='0') -- Jenis Pengguna --
+						each lap in jenis_pengguna
+							- if(lap_pengguna.id_jenis == lap.id_jenis)
+								option(value= lap.id_jenis selected) #{lap.nm_jenis}
+							- else
+								option(value= lap.id_jenis) #{lap.nm_jenis}
+				.form-group
+					label.label-control(for='Tnohp') Nomor Handphone 
+					input#Tnohp.form-control(placeholder='Contoh  08123455667', type='text', name='Tnohp', value=lap_pengguna.nohp)
+				.form-group
+					label.label-control(for='Temail') Email [Kosongkan Jika tidak punya]
+					input#Temail.form-control(placeholder='Contoh  email@email.com', type='text', name='Temail', value=lap_pengguna.email)
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Simpan Perubahan
+			a.btn.btn-primary(href='/kelola/pengguna')
+				span.glyphicon.glyphicon-list
+				|  Daftar Pengguna
+	

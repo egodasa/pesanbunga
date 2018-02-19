@@ -1,0 +1,87 @@
+extends layout.pug
+
+block content
+	style
+		| .pilih, #Bmulti_hapus {display : none;}
+	br
+	- if(flash)
+		for pesan in flash
+			+pesan(pesan.type, 'Perhatian!', pesan.message)
+	fieldset
+		legend
+			h2 Data Pengguna
+	div.form-group
+		a.btn.btn-success(href='pengguna/tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah Pengguna
+		div.btn-group
+			button.btn.btn-default(type='button') Tampilkan Data Berdasarkan
+			button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+				span.caret
+			span.sr-only Toggle Dropdown
+			ul.dropdown-menu
+				li
+					a(href='?urutkan=username_asc') Username A - Z
+				li
+					a(href='?urutkan=username_desc') Username Z - A
+				li
+					a(href='?urutkan=nama_asc') Nama Pengguna A - Z
+				li
+					a(href='?urutkan=nama_desc') Nama Pengguna Z - A
+				li
+					a(href='?urutkan=jenis') Jenis Pengguna
+	form(method='POST', action='/kelola/pengguna/hapus', id='multi_hapus')
+	form(method='GET', id='pencarian')
+	.form-inline
+		col-md-8.pull-left
+			.form-group
+			label
+				input.checkbox(type='checkbox', name='hapus', value='ya', id='hapus', form='multi_hapus')
+				b  Pilih Data
+				button.btn.btn-primary(type='submit', form='multi_hapus', name='Bmulti_hapus', id='Bmulti_hapus') Hapus Data
+		.col-md-4.pull-right.text-right
+			.form-group
+				input.form-control(type='text', name='Tcari', form='pencarian')
+				button.btn.btn-primary(type='submit', form='pencarian') Cari
+				a.btn.btn-success(href='pengguna') Reset
+	table.table.table-striped.table-bordered.table-condensed
+		tr
+			th.pilih Pilih
+			th No
+			th Username
+			th Nama Pengguna
+			th Email
+			th NoHP
+			th Jenis
+			th Aksi
+		- var no=1
+		each lap in daftar_pengguna
+			tr
+				td.pilih
+					input.checkbox.text-center(type='checkbox', name='list_pengguna',class='list_pengguna',form='multi_hapus', value=lap.id_pengguna)
+				td #{no}
+				td #{lap.username}
+				td #{lap.nm_pengguna}
+				td #{lap.email}
+				td #{lap.nohp}
+				td #{lap.nm_jenis}
+				td
+					div(class='btn-group.btn-group-justified')
+						a.btn.edit-data.btn-success(href='pengguna/edit?id_pengguna='+lap.id_pengguna)
+							span.glyphicon.glyphicon-edit
+						button.hapus-data.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_pengguna)
+							span.glyphicon.glyphicon-remove
+						div.modal.fade(role='dialog' id='konfirmasi'+lap.id_pengguna)
+							div.modal-dialog
+								div.modal-content
+									div.modal-header
+										button.close(type='button', data-dismiss='modal') &times;
+										h4.modal-title Peringatan!
+									div.modal-body
+										p Apakah Anda yakin ingin menghapus pengguna dengan username #{lap.username} dari sistem?
+									div.modal-footer.float-right
+										a.btn.btn-danger(href='pengguna/hapus?id_pengguna='+lap.id_pengguna) Ya
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+					
+			- no++
+	script(src='/multi_pilih.js')

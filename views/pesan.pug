@@ -1,0 +1,8 @@
+mixin pesan(tipe, judul, isi)
+	br
+	div.alert.alert-dismissable(class='alert-'+tipe)
+		a.close(href='#', data-dismiss='alert', aria-label='close') &times;
+		p
+			b= judul
+			br
+			span= isi

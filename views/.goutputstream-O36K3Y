@@ -1,0 +1,41 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Registrasi Pengguna baru
+		form(method='post', accept-charset='utf-8')
+			- if(!Eusername)
+				div(class='form-group')
+					label.label-control(for='Tusername') Username 
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername')
+			- else
+				div(class='form-group has-error')
+					label.label-control(for='Tusername') Username 
+					input#Tusername.form-control(placeholder='Min. 3 karakter', type='text', name='Tusername')
+				- each er in Eusername
+					span.help-block.has-error #{er.msg} 
+			div(class='form-group '+HEpass)
+				label.label-control(for='Tpassword1') Password
+				input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword1')
+				span.help-block.has-error #{Epass}  
+			.form-group
+				label.label-control(for='Tpassword2') Ulangi Password
+				input#Tpassword.form-control(placeholder='Min. 3 karakter', type='password', name='Tpassword2') 
+			div(class='form-group '+HEnama)
+				label.label-control(for='Tnama') Nama Lengkap Anda
+				input#Tpassword.form-control(placeholder='Min. 3 karakter', type='text', name='Tnama')
+				span.help-block.has-error #{Enama}  
+			div(class='form-group '+HEnohp)
+				label.label-control(for='Tnohp') Nomor Handphone
+				input#Tpassword.form-control(type='number', name='Tnohp') 
+				span.help-block.has-error #{Enohp} 
+			div(class='form-group '+HEemail)
+				label.label-control(for='Temail') Email [Tidak Wajib]
+				input#Tpassword.form-control(type='email', name='Temail')
+				span.help-block.has-error #{Eemail}  
+			button.btn.btn-primary(type='submit')
+				|  Register
+			button.btn.btn-danger(type='reset')
+				|  Reset

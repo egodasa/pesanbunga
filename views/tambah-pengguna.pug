@@ -1,0 +1,37 @@
+extends layout.pug
+
+block content
+	h2 Tambah Pengguna
+	section
+		form(method='post', accept-charset='utf-8')
+			.form-group
+				label.label-control(for='Tusername') Username 
+				input#Tusername.form-control(placeholder='Min. 6 karakter tanpa spasi', type='text', name='Tusername', value='')
+			.form-group
+				label.label-control(for='Tpassword') Kata Sandi 
+				input#Tsandi1.form-control(placeholder='Min. 6 karakter', type='password', name='Tpassword', value='')
+			.form-group
+				label.label-control(for='Tsandi2') Ulangi Kata Sandi 
+				input#Tsandi2.form-control(placeholder='', type='password', name='Tsandi2', value='')
+			.form-group
+				label.label-control(for='Tnm_pengguna') Nama Pengguna 
+				input#Tnm_pengguna.form-control(placeholder='', type='text', name='Tnm_pengguna', value='')
+			.form-group
+				label.label-control(for='Cjenis') Jenis 
+				select.form-control(name='Cjenis')
+					option(value='0') -- Jenis Pengguna --
+					each lap in jenis
+						option(value= lap.id_jenis) #{lap.nm_jenis}
+			.form-group
+				label.label-control(for='Tnohp') Nomor Handphone 
+				input#Tnohp.form-control(placeholder='Contoh  08123455667', type='text', name='Tnohp', value='')
+			.form-group
+				label.label-control(for='Temail') Email [Kosongkan Jika tidak punya]
+				input#Temail.form-control(placeholder='Contoh  email@email.com', type='text', name='Temail', value='')
+			button.btn.btn-success(type='submit')
+				span.glyphicon.glyphicon-plus-sign
+				|  Tambah Pengguna
+			a.btn.btn-primary(href='/kelola/pengguna')
+				span.glyphicon.glyphicon-list
+				|  Daftar Pengguna
+	

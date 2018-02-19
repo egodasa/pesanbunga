@@ -1,0 +1,54 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Data Status pembayaran
+		a.btn.btn-success(href='#tambah')
+			span.glyphicon.glyphicon-plus-sign
+			|  Tambah status pembayaran
+		table.table.table-striped.table-bordered
+			tr
+				th No
+				th Nama status pembayaran
+				th(colspan='2') Aksi
+			- var no=1
+			each lap in daftar_status_pembayaran
+				tr
+					td #{no}
+					td #{lap.nm_status_pembayaran}
+					td
+						a.btn.btn-success(href='/kelola/status-pembayaran/edit?id_status_pembayaran='+lap.id_status_pembayaran)
+							span.glyphicon.glyphicon-edit
+							|  Edit
+						button.btn.btn-danger(type='button', data-toggle='modal', data-target='#konfirmasi'+lap.id_status_pembayaran)
+							span.glyphicon.glyphicon-remove
+							|  Hapus
+						.modal.fade(id='konfirmasi'+lap.id_status_pembayaran, role='dialog')
+							.modal-dialog
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal') ×
+										h4.modal-title Peringatan!
+									.modal-body
+										p
+											| Apakah Anda yakin ingin menghapus status pembayaran 
+											b #{lap.nm_status_pembayaran}
+											|  dari sistem?
+									.modal-footer.float-right
+										a.btn.btn-danger(href='/kelola/status-pembayaran/hapus?id_status_pembayaran='+lap.id_status_pembayaran)     Ya    
+										button.btn.btn-default(type='button', data-dismiss='modal') Tidak
+				- no++
+	br
+	fieldset#tambah
+		legend
+			h2 Tambah Data Baru
+		form(method='post', accept-charset='utf-8')
+			.form-group
+				label.label-control(for='Tnm_status_pembayaran') Nama Status pembayaran 
+				input#Tnm_status_pembayaran.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_status_pembayaran', value='') 
+				button.btn.btn-success(type='submit')
+					span.glyphicon.glyphicon-plus-sign
+					|  Simpan
+	

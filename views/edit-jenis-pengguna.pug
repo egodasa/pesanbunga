@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+	br
+	fieldset
+		legend
+			h2 Edit Data Jenis Pengguna
+		form(method='post', accept-charset='utf-8')
+				each data_jenis in data
+					.form-group
+						label.label-control(for='Tnm_jenis') Nama Jenis Pengguna
+						input#Tnm_jenis.form-control(placeholder='Min. 3 karakter', type='text', name='Tnm_jenis', value=data_jenis.nm_jenis) 
+					button.btn.btn-success(type='submit')
+						span.glyphicon.glyphicon-plus-sign
+						|  Simpan Perubahan

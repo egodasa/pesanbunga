@@ -1,0 +1,7 @@
+$(document).ready(function(){
+socket = io();
+$('#Tpesan').hover(function(){
+	var Tjumlah = $('#Tjumlah').val();
+	socket.emit('pencarian',{jumlah : Tjumlah});
+});
+});
